@@ -39,11 +39,14 @@
 					 <goals>
 						 install
 					 </goals>
+					 <autoVersionSubmodules>true</autoVersionSubmodules>
 				 </configuration>
 			</plugin>
 		</plugins>
 	</build>
     <scm>
-		<developerConnection>scm:git:https://github.com/Kmeneouali/sfg-pet-clinic.git</developerConnection>  <tag>HEAD</tag>
-  </scm>
+		<developerConnection>scm:git:https://github.com/Kmeneouali/sfg-pet-clinic.git</developerConnection>
+		<tag>HEAD</tag>
+
+	</scm>
 </project>
