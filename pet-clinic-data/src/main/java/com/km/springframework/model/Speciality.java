@@ -1,8 +1,8 @@
 package com.km.springframework.model;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
 
-public class Speciality extends Base {
+
+public class Speciality extends BaseEntity {
 
     private String description;
 
