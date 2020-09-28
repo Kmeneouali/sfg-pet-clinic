@@ -1,12 +1,12 @@
 package com.km.springframework.services.map;
 
 import com.km.springframework.model.Speciality;
-import com.km.springframework.services.SpecialitiesService;
+import com.km.springframework.services.SpecialtyService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 @Service
-public class SpecialityServiceMap extends AbstractMapService<Speciality,Long> implements SpecialitiesService {
+public class SpecialityServiceMap extends AbstractMapService<Speciality,Long> implements SpecialtyService {
     @Override
     public Set<Speciality> findAll() {
         return super.findAll();
