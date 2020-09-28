@@ -1,12 +1,23 @@
 package com.km.springframework.services.map;
 
 import com.km.springframework.model.Owner;
+import com.km.springframework.model.Pet;
 import com.km.springframework.services.OwnerService;
+import com.km.springframework.services.PetService;
+import com.km.springframework.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements OwnerService {
+    private final PetService petService;
+    private final PetTypeService petTypeService;
+
+    public OwnerServiceMap(PetService petService, PetTypeService petTypeService) {
+        this.petService = petService;
+        this.petTypeService = petTypeService;
+    }
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -24,7 +35,28 @@ public class OwnerServiceMap extends AbstractMapService<Owner,Long> implements O
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+        if(object!=null){
+            if(object.getPets()!=null){
+                object.getPets().forEach(pet->{
+                    if(pet.getPetType()!=null){
+                        if(pet.getPetType().getId()==null){
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        }
+                    }else {
+                        throw new RuntimeException("Pet Type is required");
+                    }
+                    if(pet.getId()==null){
+                        Pet savedPet=petService.save(pet);
+                        pet.setId(savedPet.getId());
+                    }
+                });
+            }
+            return super.save(object);
+        }else {
+            return null;
+        }
+
+
     }
 
     @Override
