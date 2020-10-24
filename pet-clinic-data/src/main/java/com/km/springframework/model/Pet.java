@@ -1,13 +1,23 @@
 package com.km.springframework.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "pets")
 public class Pet extends  BaseEntity{
-
-    private PetType petType;
-    private Owner owner;
-    private LocalDate birthDate;
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "birthDate")
+    private LocalDate birthDate;
+
+    @ManyToOne
+    @JoinColumn(name ="owner_id")
+    private Owner owner;
+
+    @ManyToOne
+    @JoinColumn(name ="type_id")
+    private PetType petType;
 
     public String getName() {
         return name;
